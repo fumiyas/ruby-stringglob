@@ -1,3 +1,3 @@
-module Stringglob
+module StringGlob
   VERSION = "0.0.1"
 end

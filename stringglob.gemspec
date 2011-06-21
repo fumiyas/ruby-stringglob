@@ -4,12 +4,12 @@ require "stringglob/version"
 
 Gem::Specification.new do |s|
   s.name        = "stringglob"
-  s.version     = Stringglob::VERSION
+  s.version     = StringGlob::VERSION
   s.authors     = ["SATOH Fumiyasu"]
   s.email       = ["fumiyas@osstech.co.jp"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Generate a Regexp object from a glob(3) pattern}
+  s.description = %q{Generate a Regexp object from a glob(3) pattern}
 
   s.rubyforge_project = "stringglob"
 
