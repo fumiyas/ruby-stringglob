@@ -1,34 +1,41 @@
 ## Ruby StringGlob: Generate a Regexp object from a glob(3) pattern
-##       (Port Text::Glob 0.08 from Perl to Ruby)
-## Copyright (c) 2002, 2003, 2006, 2007 Richard Clamp.  All Rights Reserved.
-## Copyright (c) 2009-2011 SATOH Fumiyasu @ OSS Technology Inc.
-##               <http://www.osstech.co.jp/>
 ##
-## License: This module is free software; you can redistribute it and/or
-##          modify it under the same terms as Ruby itself
-## Date: 2011-06-21, since 2009-07-15
+## Author:: SATOH Fumiyasu
+## Copyright:: (c) 2007-2011 SATOH Fumiyasu @ OSS Technology, Corp.
+## License:: You can redistribute it and/or modify it under the same term as Ruby.
+## Date:: 2011-06-21, since 2009-07-15
+##
+
+## This is a Ruby version of Perl Text::Glob 0.08
+## Copyright (c) 2002, 2003, 2006, 2007 Richard Clamp.  All Rights Reserved.
 
 require "stringglob/version"
 
+## Generate a Regexp object from a glob(3) pattern
 module StringGlob
+  ## Ignore case
   IGNORE_CASE =			1 << 0
-  NO_STRICT_LEADING_DOT = 	1 << 1
-  NO_STRICT_WILDCARD_SLASH =	1 << 2
+  ## Leading star '*' mathces leading dot '.'
+  STAR_MATCHES_LEADING_DOT = 	1 << 1
+  ## Star '*' mathces slash '/'
+  STAR_MATCHES_SLASH =	        1 << 2
 
+  ## Returns a Regex object which is the equivalent of the globbing pattern.
   def regexp(glob, opt = 0, code = nil)
     re = regexp_string(glob, opt)
     return Regexp.new("\\A#{re}\\z", nil, code)
   end
   module_function :regexp
 
+  ## Returns a regexp String object which is the equivalent of the globbing pattern.
   def regexp_string(glob, opt = 0)
     re_str = ''
     in_curlies = 0
     escaping = false
     first_byte = true
     asterisk = false
-    strict_leading_dot = (opt & NO_STRICT_LEADING_DOT == 0)
-    strict_wildcard_slash = (opt & NO_STRICT_WILDCARD_SLASH == 0)
+    strict_leading_dot = (opt & STAR_MATCHES_LEADING_DOT == 0)
+    strict_wildcard_slash = (opt & STAR_MATCHES_SLASH == 0)
     glob.scan(/./m) do |glob_c|
       if first_byte
 	if strict_leading_dot

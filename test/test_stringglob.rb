@@ -39,21 +39,21 @@ class StringGlobTest < Test::Unit::TestCase
     ## strict . rule match
     assert_not_nil	SG.regexp('.*.foo').match('.file.foo')
     ## relaxed . rule
-    assert_not_nil	SG.regexp('*.foo', SG::NO_STRICT_LEADING_DOT).match('.file.foo')
+    assert_not_nil	SG.regexp('*.foo', SG::STAR_MATCHES_LEADING_DOT).match('.file.foo')
 
     ## strict wildcard / fail
     assert_nil		SG.regexp('*.fo?').match('foo/file.fob')
     ## strict wildcard / match
     assert_not_nil	SG.regexp('*/*.fo?').match('foo/file.fob')
     ## relaxed wildcard /
-    assert_not_nil	SG.regexp('*.fo?', SG::NO_STRICT_WILDCARD_SLASH).match('foo/file.fob')
+    assert_not_nil	SG.regexp('*.fo?', SG::STAR_MATCHES_SLASH).match('foo/file.fob')
 
     ## more strict wildcard / fail
     assert_nil		SG.regexp('foo/*.foo').match('foo/.foo')
     ## more strict wildcard / match
     assert_not_nil	SG.regexp('foo/.f*').match('foo/.foo')
     ## relaxed wildcard /
-    assert_not_nil	SG.regexp('*.foo', SG::NO_STRICT_WILDCARD_SLASH).match('foo/.foo')
+    assert_not_nil	SG.regexp('*.foo', SG::STAR_MATCHES_SLASH).match('foo/.foo')
 
     ## properly escape +
     assert_not_nil	SG.regexp('f+.foo').match('f+.foo')
