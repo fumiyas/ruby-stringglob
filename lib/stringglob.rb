@@ -3,7 +3,7 @@
 ## Author:: SATOH Fumiyasu
 ## Copyright:: (c) 2007-2011 SATOH Fumiyasu @ OSS Technology, Corp.
 ## License:: You can redistribute it and/or modify it under the same term as Ruby.
-## Date:: 2011-06-21, since 2009-07-15
+## Date:: 2011-11-01, since 2009-07-15
 ##
 
 ## This is a Ruby version of Perl Text::Glob 0.08
@@ -13,11 +13,11 @@ require "stringglob/version"
 
 ## Generate a Regexp object from a glob(3) pattern
 module StringGlob
-  ## Ignore case
+  ## Ignore case.
   IGNORE_CASE =			1 << 0
-  ## Leading star '*' mathces leading dot '.'
+  ## Leading star '*' mathces leading dot '.'.
   STAR_MATCHES_LEADING_DOT = 	1 << 1
-  ## Star '*' mathces slash '/'
+  ## Star '*' mathces slash '/'.
   STAR_MATCHES_SLASH =	        1 << 2
 
   ## Returns a Regex object which is the equivalent of the globbing pattern.
@@ -50,8 +50,7 @@ module StringGlob
       if glob_c == '/'
 	first_byte = true
       end
-      if (glob_c == '.' || glob_c == '(' || glob_c == ')' || glob_c == '|' ||
-	  glob_c == '+' || glob_c == '^' || glob_c == '$' || glob_c == '@' || glob_c == '%' )
+      if ('.()|+^$@%'.include?(glob_c))
 	re_str += '\\' + glob_c
       elsif glob_c == '*'
 	if escaping
