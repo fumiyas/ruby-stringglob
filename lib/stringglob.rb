@@ -34,17 +34,17 @@ module StringGlob
     escaping = false
     first_byte = true
     asterisk = false
-    strict_leading_dot = (opt & STAR_MATCHES_LEADING_DOT == 0)
-    strict_wildcard_slash = (opt & STAR_MATCHES_SLASH == 0)
+    star_matches_leading_dot = (opt & STAR_MATCHES_LEADING_DOT == 0)
+    star_matches_slash = (opt & STAR_MATCHES_SLASH == 0)
     glob.scan(/./m) do |glob_c|
       if first_byte
-	if strict_leading_dot
+	if star_matches_leading_dot
 	  re_str += '(?=[^\.])' unless glob_c == '.'
 	end
 	first_byte = false
       end
       if asterisk && glob_c != '*'
-	re_str += strict_wildcard_slash ? '[^/]*' : '.*'
+	re_str += star_matches_slash ? '[^/]*' : '.*'
 	asterisk = false
       end
       if glob_c == '/'
@@ -63,7 +63,7 @@ module StringGlob
 	end
       elsif glob_c == '?'
 	re_str += escaping ? '\\?' :
-	  strict_wildcard_slash ? '[^/]' : '.'
+	  star_matches_slash ? '[^/]' : '.'
       elsif glob_c == '{'
 	re_str += escaping ? '\\{' : '('
 	in_curlies += 1 unless escaping
@@ -89,7 +89,7 @@ module StringGlob
       escaping = false
     end
     if asterisk
-      re_str += strict_wildcard_slash ? '[^/]*' : '.*'
+      re_str += star_matches_slash ? '[^/]*' : '.*'
     end
 
     re_str = "(?i:#{re_str})" if (opt & IGNORE_CASE != 0)
