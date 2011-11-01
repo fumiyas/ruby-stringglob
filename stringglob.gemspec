@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = StringGlob::VERSION
   s.authors     = ["SATOH Fumiyasu"]
   s.email       = ["fumiyas@osstech.co.jp"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/fumiyas/ruby-stringglob"
   s.summary     = %q{Generate a Regexp object from a glob(3) pattern}
   s.description = %q{Generate a Regexp object from a glob(3) pattern}
 
