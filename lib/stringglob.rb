@@ -15,9 +15,9 @@ require "stringglob/version"
 module StringGlob
   ## Ignore case.
   IGNORE_CASE =			1 << 0
-  ## Leading star '*' mathces leading dot '.'.
+  ## Leading star '*' matches leading dot '.'.
   STAR_MATCHES_LEADING_DOT = 	1 << 1
-  ## Star '*' mathces slash '/'.
+  ## Star '*' matches slash '/'.
   STAR_MATCHES_SLASH =	        1 << 2
 
   ## Returns a Regex object which is the equivalent of the globbing pattern.
