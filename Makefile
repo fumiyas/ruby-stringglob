@@ -1,12 +1,18 @@
-GEM = pkg/stringglob-0.0.2.gem
-
 default: build
 
 build: gem
 
 gem:
+	rm pkg/*.gem
 	rake build
 
 upload:
-	 gem push $(GEM)
+	$(MAKE) gem
+	gem push pkg/*.gem
+
+clean:
+	rake clean
+
+distclean:
+	rake clobber
 
