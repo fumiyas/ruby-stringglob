@@ -39,7 +39,7 @@ module StringGlob
     glob.scan(/./m) do |glob_c|
       if first_byte
 	if star_matches_leading_dot
-	  re_str += '(?=[^\.])' unless glob_c == '.'
+	  re_str += '(?=[^.])' unless glob_c =~ /^[.{\[\\]$/
 	end
 	first_byte = false
       end

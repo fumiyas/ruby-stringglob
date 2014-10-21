@@ -38,6 +38,10 @@ class StringGlobTest < Test::Unit::TestCase
     assert_nil		SG.regexp('*.foo').match('.file.foo')
     ## strict . rule match
     assert_not_nil	SG.regexp('.*.foo').match('.file.foo')
+    assert_not_nil	SG.regexp('\.foo').match('.foo')
+    assert_not_nil	SG.regexp('[.]foo').match('.foo')
+    assert_not_nil	SG.regexp('{foo,.bar}').match('.bar')
+    assert_not_nil	SG.regexp('{.foo,bar}').match('.foo')
     ## relaxed . rule
     assert_not_nil	SG.regexp('*.foo', SG::STAR_MATCHES_LEADING_DOT).match('.file.foo')
 
